@@ -22,6 +22,7 @@ public class Main {
                 currentSum += i;
             }
         }
+
         if (currentSum == goal) {
             StringJoiner sj = new StringJoiner("+");
             for (Integer i : current) {
@@ -29,6 +30,14 @@ public class Main {
             }
             System.out.println(sj.toString());
             return true;
+        } else if (currentSum > goal) {
+            return false;
+        }
+
+        for (int i = sumStart; i <= goal; i++) {
+            List<Integer> newList = new LinkedList<>(current);
+            newList.add(i);
+            sum(goal, newList);
         }
         return false;
     }
