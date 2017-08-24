@@ -7,7 +7,10 @@ import java.util.StringJoiner;
 public class Main {
 
     public static void main(String[] args) {
-        sum(5, new LinkedList<>());
+        for (int i = 1; i <= 10; i++) {
+            System.out.println("Sums for " + i);
+            sum(i, new LinkedList<>());
+        }
     }
 
     private static boolean sum (int goal, List<Integer> current) {
