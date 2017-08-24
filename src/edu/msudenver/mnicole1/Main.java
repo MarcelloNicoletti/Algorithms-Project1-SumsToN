@@ -9,11 +9,11 @@ public class Main {
     public static void main(String[] args) {
         for (int i = 1; i <= 10; i++) {
             System.out.println("Sums for " + i);
-            sum(i, new LinkedList<>());
+            calculateSums(i, new LinkedList<>());
         }
     }
 
-    private static boolean sum (int goal, List<Integer> current) {
+    private static int calculateSums (int goal, List<Integer> current) {
         int sumStart = 1;
         int currentSum = 0;
         if (!current.isEmpty()) {
@@ -29,16 +29,17 @@ public class Main {
                 sj.add(i.toString());
             }
             System.out.println(sj.toString());
-            return true;
-        } else if (currentSum > goal) {
-            return false;
-        }
+        } else if (currentSum < goal) {
+            for (int i = sumStart; i <= goal; i++) {
+                List<Integer> newList = new LinkedList<>(current);
+                newList.add(i);
 
-        for (int i = sumStart; i <= goal; i++) {
-            List<Integer> newList = new LinkedList<>(current);
-            newList.add(i);
-            sum(goal, newList);
+                int newSum = calculateSums(goal, newList);
+                if (newSum >= goal) {
+                    break;
+                }
+            }
         }
-        return false;
+        return currentSum;
     }
 }
